@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="让ai帮忙给了一份学习路线看看我能坚持多久，第一个月的内容比较基础，跳过一下，从第二个月开始。 今天是2025年4月22日周二，从明天23号开始我将全程记录我的学习过程。 📅 第2个月：信息安全基础 &amp; 工具入门（详细版）目标：掌握渗透测试基本工具（Nmap、Burp Suite、Metasploit），理解漏洞原理。📌 第5周：信息安全基础 &amp; 环境搭建   日期 任务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从0开始学习渗透">
+<meta property="og:url" content="http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/index.html">
+<meta property="og:site_name" content="P1ant731">
+<meta property="og:description" content="让ai帮忙给了一份学习路线看看我能坚持多久，第一个月的内容比较基础，跳过一下，从第二个月开始。 今天是2025年4月22日周二，从明天23号开始我将全程记录我的学习过程。 📅 第2个月：信息安全基础 &amp; 工具入门（详细版）目标：掌握渗透测试基本工具（Nmap、Burp Suite、Metasploit），理解漏洞原理。📌 第5周：信息安全基础 &amp; 环境搭建   日期 任务">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-22T09:23:47.000Z">
+<meta property="article:modified_time" content="2025-04-22T09:25:16.700Z">
+<meta property="article:author" content="P1ant731">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>从0开始学习渗透</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&text=从0开始学习渗透"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&is_video=false&description=从0开始学习渗透"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=从0开始学习渗透&body=Check out this article: http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&name=从0开始学习渗透&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&t=从0开始学习渗透"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%85-%E7%AC%AC2%E4%B8%AA%E6%9C%88%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80-%E5%B7%A5%E5%85%B7%E5%85%A5%E9%97%A8%EF%BC%88%E8%AF%A6%E7%BB%86%E7%89%88%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">📅 第2个月：信息安全基础 &amp; 工具入门（详细版）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%EF%BC%9A%E6%8E%8C%E6%8F%A1%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7%EF%BC%88Nmap%E3%80%81Burp-Suite%E3%80%81Metasploit%EF%BC%89%EF%BC%8C%E7%90%86%E8%A7%A3%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E3%80%82"><span class="toc-number">1.0.1.</span> <span class="toc-text">目标：掌握渗透测试基本工具（Nmap、Burp Suite、Metasploit），理解漏洞原理。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC5%E5%91%A8%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.1.</span> <span class="toc-text">📌 第5周：信息安全基础 &amp; 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90"><span class="toc-number">1.1.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC6%E5%91%A8%EF%BC%9A%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-%E6%89%AB%E6%8F%8F%EF%BC%88Nmap%E3%80%81Whois%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">📌 第6周：信息收集 &amp; 扫描（Nmap、Whois）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC7%E5%91%A8%EF%BC%9AWeb%E5%AE%89%E5%85%A8%E5%85%A5%E9%97%A8%EF%BC%88Burp-Suite%E3%80%81SQL%E6%B3%A8%E5%85%A5%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">📌 第7周：Web安全入门（Burp Suite、SQL注入）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC8%E5%91%A8%EF%BC%9AMetasploit%E6%A1%86%E6%9E%B6-%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">1.4.</span> <span class="toc-text">📌 第8周：Metasploit框架 &amp; 漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-3"><span class="toc-number">1.4.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%85-%E7%AC%AC3%E4%B8%AA%E6%9C%88%EF%BC%9AWeb%E5%AE%89%E5%85%A8%E4%B8%93%E9%A1%B9%EF%BC%88%E8%B6%85%E8%AF%A6%E7%BB%86%E7%89%88%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">📅 第3个月：Web安全专项（超详细版）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3OWASP-Top-10%E6%BC%8F%E6%B4%9E%EF%BC%8C%E6%8E%8C%E6%8F%A1Burp-Suite%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD%E3%80%82"><span class="toc-number">2.0.1.</span> <span class="toc-text">目标：深入理解OWASP Top 10漏洞，掌握Burp Suite高级功能。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC9%E5%91%A8%EF%BC%9ASQL%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6"><span class="toc-number">2.1.</span> <span class="toc-text">📌 第9周：SQL注入进阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC10%E5%91%A8%EF%BC%9AXSS-CSRF"><span class="toc-number">2.2.</span> <span class="toc-text">📌 第10周：XSS &amp; CSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC11%E5%91%A8%EF%BC%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E-SSRF"><span class="toc-number">2.3.</span> <span class="toc-text">📌 第11周：文件上传漏洞 &amp; SSRF</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-4"><span class="toc-number">2.3.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC12%E5%91%A8%EF%BC%9A%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5-XXE"><span class="toc-number">2.4.</span> <span class="toc-text">📌 第12周：命令注入 &amp; XXE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-5"><span class="toc-number">2.4.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%85-%E7%AC%AC4%E4%B8%AA%E6%9C%88%EF%BC%9A%E7%B3%BB%E7%BB%9F-%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F%EF%BC%88%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">📅 第4个月：系统 &amp; 网络渗透（每日计划）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%9B%AE%E6%A0%87"><span class="toc-number">3.1.</span> <span class="toc-text">🎯 目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC13%E5%91%A8%EF%BC%9AWindows-Linux%E6%8F%90%E6%9D%83"><span class="toc-number">3.2.</span> <span class="toc-text">📌 第13周：Windows&#x2F;Linux提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A%E5%86%85%E6%A0%B8%E6%BC%8F%E6%B4%9E%E3%80%81SUID-SGID%E3%80%81%E6%9C%8D%E5%8A%A1%E6%BB%A5%E7%94%A8%E3%80%81%E4%BB%A4%E7%89%8C%E7%AA%83%E5%8F%96%E3%80%82"><span class="toc-number">3.2.1.</span> <span class="toc-text">核心知识点：内核漏洞、SUID&#x2F;SGID、服务滥用、令牌窃取。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-6"><span class="toc-number">3.2.2.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC14%E5%91%A8%EF%BC%9A%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-Wi-Fi%E5%AE%89%E5%85%A8"><span class="toc-number">3.3.</span> <span class="toc-text">📌 第14周：密码破解 &amp; Wi-Fi安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A%E5%93%88%E5%B8%8C%E7%A0%B4%E8%A7%A3%E3%80%81WPA2%E6%8F%A1%E6%89%8B%E5%8C%85%E6%8D%95%E8%8E%B7%E3%80%81%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E3%80%82"><span class="toc-number">3.3.1.</span> <span class="toc-text">核心知识点：哈希破解、WPA2握手包捕获、中间人攻击。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-7"><span class="toc-number">3.3.2.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC15%E5%91%A8%EF%BC%9A%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="toc-number">3.4.</span> <span class="toc-text">📌 第15周：内网渗透 &amp; 横向移动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9ANTLM-Relay%E3%80%81Pass-the-Hash%E3%80%81BloodHound%E3%80%82"><span class="toc-number">3.4.1.</span> <span class="toc-text">核心知识点：NTLM Relay、Pass the Hash、BloodHound。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-8"><span class="toc-number">3.4.2.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC16%E5%91%A8%EF%BC%9A%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98-%E6%8C%91%E6%88%98HTB%E4%B8%AD%E7%BA%A7%E9%9D%B6%E6%9C%BA"><span class="toc-number">3.5.</span> <span class="toc-text">📌 第16周：综合实战 &amp; 挑战HTB中级靶机</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        从0开始学习渗透
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">P1ant731</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-04-22T09:23:47.000Z" class="dt-published" itemprop="datePublished">2025-04-22</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <p>让ai帮忙给了一份学习路线<del>看看我能坚持多久</del>，第一个月的内容比较基础，跳过一下，从第二个月开始。</p>
+<p>今天是2025年4月22日周二，从明天23号开始我将全程记录我的学习过程。</p>
+<h1 id="📅-第2个月：信息安全基础-工具入门（详细版）"><a href="#📅-第2个月：信息安全基础-工具入门（详细版）" class="headerlink" title="📅 第2个月：信息安全基础 &amp; 工具入门（详细版）"></a><strong>📅 第2个月：信息安全基础 &amp; 工具入门（详细版）</strong></h1><h3 id="目标：掌握渗透测试基本工具（Nmap、Burp-Suite、Metasploit），理解漏洞原理。"><a href="#目标：掌握渗透测试基本工具（Nmap、Burp-Suite、Metasploit），理解漏洞原理。" class="headerlink" title="目标：掌握渗透测试基本工具（Nmap、Burp Suite、Metasploit），理解漏洞原理。"></a><strong>目标</strong>：掌握渗透测试基本工具（Nmap、Burp Suite、Metasploit），理解漏洞原理。</h3><h2 id="📌-第5周：信息安全基础-环境搭建"><a href="#📌-第5周：信息安全基础-环境搭建" class="headerlink" title="📌 第5周：信息安全基础 &amp; 环境搭建"></a><strong>📌 第5周：信息安全基础 &amp; 环境搭建</strong></h2><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ 学习CIA三元组（机密性、完整性、可用性），了解OWASP Top 10。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ 安装Kali Linux（虚拟机或物理机），配置基础环境（更新<code>apt</code>）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ 搭建DVWA（Damn Vulnerable Web App）靶机，熟悉其界面。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ 学习HTTP协议，用浏览器开发者工具分析请求（查看Headers、Cookies）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ 使用<code>curl</code>和<code>Wget</code>手动发送HTTP请求，理解GET&#x2F;POST区别。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 实战：修改DVWA的难度级别，尝试触发一个XSS弹窗（<code>&lt;script&gt;alert(1)&lt;/script&gt;</code>）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 整理笔记：记录信息安全核心概念、HTTP协议要点。</td>
+</tr>
+</tbody></table>
+<h3 id="📚-推荐资源"><a href="#📚-推荐资源" class="headerlink" title="📚 推荐资源"></a><strong>📚 推荐资源</strong></h3><ul>
+<li><strong>DVWA安装</strong>：<a target="_blank" rel="noopener" href="https://github.com/digininja/DVWA">DVWA GitHub</a></li>
+<li><strong>HTTP协议</strong>：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTTP">MDN HTTP教程</a></li>
+</ul>
+<hr>
+<h2 id="📌-第6周：信息收集-扫描（Nmap、Whois）"><a href="#📌-第6周：信息收集-扫描（Nmap、Whois）" class="headerlink" title="📌 第6周：信息收集 &amp; 扫描（Nmap、Whois）"></a><strong>📌 第6周：信息收集 &amp; 扫描（Nmap、Whois）</strong></h2><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ 学习Nmap基础：<code>nmap -sV &lt;IP&gt;</code>（扫描开放端口和服务版本）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ 使用Nmap脚本（<code>--script</code>参数），如<code>vulners</code>扫描漏洞。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ 学习<code>Whois</code>查询域名信息，<code>theHarvester</code>收集邮箱&#x2F;子域名。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ 使用<code>Shodan</code>（搜索引擎）查找暴露的物联网设备。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ 实战：扫描自己的路由器（<code>nmap 192.168.1.1</code>），分析结果。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 挑战TryHackMe房间：<a target="_blank" rel="noopener" href="https://tryhackme.com/room/furthernmap">Nmap</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 整理笔记：Nmap常用命令、信息收集方法论。</td>
+</tr>
+</tbody></table>
+<h3 id="📚-推荐资源-1"><a href="#📚-推荐资源-1" class="headerlink" title="📚 推荐资源"></a><strong>📚 推荐资源</strong></h3><ul>
+<li><strong>Nmap备忘单</strong>：<a target="_blank" rel="noopener" href="https://www.stationx.net/nmap-cheat-sheet/">Nmap Cheat Sheet</a></li>
+<li><strong>Shodan</strong>：<a target="_blank" rel="noopener" href="https://www.shodan.io/">Shodan搜索技巧</a></li>
+</ul>
+<hr>
+<h2 id="📌-第7周：Web安全入门（Burp-Suite、SQL注入）"><a href="#📌-第7周：Web安全入门（Burp-Suite、SQL注入）" class="headerlink" title="📌 第7周：Web安全入门（Burp Suite、SQL注入）"></a><strong>📌 第7周：Web安全入门（Burp Suite、SQL注入）</strong></h2><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ 安装Burp Suite Community，配置浏览器代理（127.0.0.1:8080）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ 拦截DVWA登录请求，修改参数（如<code>admin&#39; OR &#39;1&#39;=&#39;1</code>尝试SQL注入）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ 学习SQL注入原理，手动利用<code>UNION SELECT</code>提取数据库信息。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ 使用<code>SQLmap</code>自动化测试：<code>sqlmap -u &quot;http://target.com?id=1&quot; --dbs</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ 实战：在DVWA上完成Low&#x2F;Medium难度的SQL注入挑战。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 尝试PortSwigger Lab：<a target="_blank" rel="noopener" href="https://portswigger.net/web-security/sql-injection">SQL注入</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 整理笔记：Burp Suite拦截、SQL注入Payload集合。</td>
+</tr>
+</tbody></table>
+<h3 id="📚-推荐资源-2"><a href="#📚-推荐资源-2" class="headerlink" title="📚 推荐资源"></a><strong>📚 推荐资源</strong></h3><ul>
+<li><strong>Burp Suite教程</strong>：<a target="_blank" rel="noopener" href="https://portswigger.net/web-security">PortSwigger Academy</a></li>
+<li><strong>SQL注入Payload</strong>：<a target="_blank" rel="noopener" href="https://github.com/swisskyrepo/PayloadsAllTheThings">PayloadsAllTheThings</a></li>
+</ul>
+<hr>
+<h2 id="📌-第8周：Metasploit框架-漏洞利用"><a href="#📌-第8周：Metasploit框架-漏洞利用" class="headerlink" title="📌 第8周：Metasploit框架 &amp; 漏洞利用"></a><strong>📌 第8周：Metasploit框架 &amp; 漏洞利用</strong></h2><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ 学习Metasploit基础：<code>msfconsole</code>，<code>search</code>漏洞模块。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ 使用<code>exploit/multi/handler</code>监听反弹Shell（结合<code>msfvenom</code>生成Payload）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ 攻击Metasploitable靶机（如<code>exploit/unix/ftp/vsftpd_234_backdoor</code>）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ 学习后渗透命令（<code>meterpreter</code>的<code>getsystem</code>、<code>hashdump</code>）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ 实战：在TryHackMe完成<a target="_blank" rel="noopener" href="https://tryhackme.com/room/metasploitintro">Metasploit房间</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 挑战HTB“Starting Point”机器（如Meow）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 整理笔记：Metasploit常用命令、漏洞利用流程。</td>
+</tr>
+</tbody></table>
+<h3 id="📚-推荐资源-3"><a href="#📚-推荐资源-3" class="headerlink" title="📚 推荐资源"></a><strong>📚 推荐资源</strong></h3><ul>
+<li><strong>Metasploit指南</strong>：<a target="_blank" rel="noopener" href="https://www.offensive-security.com/metasploit-unleashed/">Metasploit Unleashed</a></li>
+<li><strong>HTB Starting Point</strong>：<a target="_blank" rel="noopener" href="https://www.hackthebox.com/starting-point">Hack The Box</a></li>
+</ul>
+<hr>
+<h1 id="📅-第3个月：Web安全专项（超详细版）"><a href="#📅-第3个月：Web安全专项（超详细版）" class="headerlink" title="📅 第3个月：Web安全专项（超详细版）"></a><strong>📅 第3个月：Web安全专项（超详细版）</strong></h1><h3 id="目标：深入理解OWASP-Top-10漏洞，掌握Burp-Suite高级功能。"><a href="#目标：深入理解OWASP-Top-10漏洞，掌握Burp-Suite高级功能。" class="headerlink" title="目标：深入理解OWASP Top 10漏洞，掌握Burp Suite高级功能。"></a><strong>目标</strong>：深入理解OWASP Top 10漏洞，掌握Burp Suite高级功能。</h3><h2 id="📌-第9周：SQL注入进阶"><a href="#📌-第9周：SQL注入进阶" class="headerlink" title="📌 第9周：SQL注入进阶"></a><strong>📌 第9周：SQL注入进阶</strong></h2><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ 学习盲注（Boolean-Based&#x2F;Time-Based），手工构造Payload。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ 使用<code>SQLmap</code>的<code>--level</code>和<code>--risk</code>参数提高检测深度。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ 绕过WAF（如<code>/**/</code>代替空格，<code>CHAR()</code>编码）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ 实战：在PortSwigger Lab完成<a target="_blank" rel="noopener" href="https://portswigger.net/web-security/sql-injection/blind">SQL盲注</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ 学习Out-of-Band（OOB）注入，利用DNS外带数据。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 挑战DVWA的Impossible级别SQL注入（理解防御措施）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 整理笔记：SQL注入绕过技巧、自动化工具对比。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📌-第10周：XSS-CSRF"><a href="#📌-第10周：XSS-CSRF" class="headerlink" title="📌 第10周：XSS &amp; CSRF"></a><strong>📌 第10周：XSS &amp; CSRF</strong></h2><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ 学习反射型XSS，在DVWA中弹窗（<code>&lt;script&gt;alert(document.cookie)&lt;/script&gt;</code>）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ 存储型XSS：在留言板注入持久化脚本。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ DOM型XSS：分析前端JS代码（如<code>eval()</code>漏洞）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ 使用BeEF框架（Browser Exploitation）劫持会话。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ CSRF攻击：伪造请求修改DVWA用户密码（Burp Suite生成PoC）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 实战：PortSwigger的<a target="_blank" rel="noopener" href="https://portswigger.net/web-security/cross-site-scripting">XSS Labs</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 整理笔记：XSS类型对比、CSRF防御方法（SameSite Cookie）。</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="📌-第11周：文件上传漏洞-SSRF"><a href="#📌-第11周：文件上传漏洞-SSRF" class="headerlink" title="📌 第11周：文件上传漏洞 &amp; SSRF"></a><strong>📌 第11周：文件上传漏洞 &amp; SSRF</strong></h2><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ 学习文件上传漏洞原理，理解MIME类型绕过、黑名单绕过。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ 实战：在DVWA中上传Webshell，尝试绕过文件类型限制。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ 学习SSRF（服务器端请求伪造）原理，构造内网探测Payload。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ 使用Burp Suite Intruder测试SSRF，尝试访问本地文件（如<code>file:///etc/passwd</code>）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ 实战：在PortSwigger Lab完成<a target="_blank" rel="noopener" href="https://portswigger.net/web-security/ssrf">SSRF挑战</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 挑战TryHackMe房间：<a target="_blank" rel="noopener" href="https://tryhackme.com/room/ssrf">SSRF</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 整理笔记：文件上传漏洞防御措施、SSRF利用技巧。</td>
+</tr>
+</tbody></table>
+<h3 id="📚-推荐资源-4"><a href="#📚-推荐资源-4" class="headerlink" title="📚 推荐资源"></a><strong>📚 推荐资源</strong></h3><ul>
+<li><strong>文件上传漏洞</strong>：<a target="_blank" rel="noopener" href="https://owasp.org/www-community/vulnerabilities/Unrestricted_File_Upload">OWASP文件上传安全</a></li>
+<li><strong>SSRF教程</strong>：<a target="_blank" rel="noopener" href="https://portswigger.net/web-security/ssrf">SSRF指南</a></li>
+</ul>
+<hr>
+<h2 id="📌-第12周：命令注入-XXE"><a href="#📌-第12周：命令注入-XXE" class="headerlink" title="📌 第12周：命令注入 &amp; XXE"></a><strong>📌 第12周：命令注入 &amp; XXE</strong></h2><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ 学习命令注入原理，理解<code>&amp;&amp;</code>、&#96;</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ 实战：在DVWA中利用命令注入执行<code>id</code>、<code>whoami</code>等命令。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ 学习XML外部实体注入（XXE）原理，构造读取本地文件的Payload。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ 使用Burp Suite测试XXE，尝试读取敏感文件（如<code>/etc/passwd</code>）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ 实战：在PortSwigger Lab完成<a target="_blank" rel="noopener" href="https://portswigger.net/web-security/xxe">XXE挑战</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 挑战TryHackMe房间：<a target="_blank" rel="noopener" href="https://tryhackme.com/room/xxe">XXE</a>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 整理笔记：命令注入防御方法、XXE利用与防御技巧。</td>
+</tr>
+</tbody></table>
+<h3 id="📚-推荐资源-5"><a href="#📚-推荐资源-5" class="headerlink" title="📚 推荐资源"></a><strong>📚 推荐资源</strong></h3><ul>
+<li><strong>命令注入</strong>：<a target="_blank" rel="noopener" href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Command%20Injection">PayloadsAllTheThings</a></li>
+<li><strong>XXE教程</strong>：<a target="_blank" rel="noopener" href="https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A4-XML_External_Entities">OWASP XXE</a></li>
+</ul>
+<hr>
+<h1 id="📅-第4个月：系统-网络渗透（每日计划）"><a href="#📅-第4个月：系统-网络渗透（每日计划）" class="headerlink" title="📅 第4个月：系统 &amp; 网络渗透（每日计划）"></a><strong>📅 第4个月：系统 &amp; 网络渗透（每日计划）</strong></h1><h2 id="🎯-目标"><a href="#🎯-目标" class="headerlink" title="🎯 目标"></a><strong>🎯 目标</strong></h2><ol>
+<li>掌握 <strong>Windows&#x2F;Linux提权技术</strong>（内核漏洞、配置错误）。</li>
+<li>学会 <strong>密码破解</strong>（Hashcat、John the Ripper）。</li>
+<li>理解 <strong>Wi-Fi安全</strong>（WPA2破解、中间人攻击）。</li>
+<li>入门 <strong>内网渗透</strong>（横向移动、权限维持）。</li>
+</ol>
+<hr>
+<h2 id="📌-第13周：Windows-Linux提权"><a href="#📌-第13周：Windows-Linux提权" class="headerlink" title="📌 第13周：Windows&#x2F;Linux提权"></a><strong>📌 第13周：Windows&#x2F;Linux提权</strong></h2><h3 id="核心知识点：内核漏洞、SUID-SGID、服务滥用、令牌窃取。"><a href="#核心知识点：内核漏洞、SUID-SGID、服务滥用、令牌窃取。" class="headerlink" title="核心知识点：内核漏洞、SUID&#x2F;SGID、服务滥用、令牌窃取。"></a><strong>核心知识点</strong>：内核漏洞、SUID&#x2F;SGID、服务滥用、令牌窃取。</h3><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+<th align="left"><strong>具体操作</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ <strong>Windows提权基础</strong></td>
+<td align="left">- 学习<code>whoami /priv</code>查看权限。 - 使用<code>Windows-Exploit-Suggester</code>找漏洞。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ <strong>内核漏洞提权</strong>（如PrintNightmare）</td>
+<td align="left">- 复现CVE-2021-1675： <code>python3 CVE-2021-1675.py -u user -p pass -d IP</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ <strong>Linux提权：SUID&#x2F;SGID</strong></td>
+<td align="left">- 查找SUID文件：<code>find / -perm -4000 2&gt;/dev/null</code>。 - 利用<code>/bin/bash -p</code>提权。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ <strong>Cron Jobs提权</strong></td>
+<td align="left">- 检查可写的Cron任务：<code>cat /etc/crontab</code>。 - 写入反向Shell脚本。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ <strong>Docker逃逸</strong></td>
+<td align="left">- 检查<code>docker.sock</code>挂载：<code>ls -la /var/run/docker.sock</code>。 - 尝试<code>chroot</code>逃逸。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 <strong>实战：HTB靶机（如Jerry）</strong></td>
+<td align="left">- 利用Tomcat WAR部署获取Shell，提权至NT AUTHORITY\SYSTEM。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 <strong>整理笔记</strong></td>
+<td align="left">- 记录Windows&#x2F;Linux提权命令和漏洞复现步骤。</td>
+</tr>
+</tbody></table>
+<h3 id="📚-推荐资源-6"><a href="#📚-推荐资源-6" class="headerlink" title="📚 推荐资源"></a><strong>📚 推荐资源</strong></h3><ul>
+<li><strong>提权命令备忘单</strong>：<a target="_blank" rel="noopener" href="https://gtfobins.github.io/">GTFOBins</a>（Linux）、<a target="_blank" rel="noopener" href="https://lolbas-project.github.io/">LOLBAS</a>（Windows）。</li>
+<li><strong>HTB靶机</strong>：<a target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit">TJ Null’s OSCP List</a>。</li>
+</ul>
+<hr>
+<h2 id="📌-第14周：密码破解-Wi-Fi安全"><a href="#📌-第14周：密码破解-Wi-Fi安全" class="headerlink" title="📌 第14周：密码破解 &amp; Wi-Fi安全"></a><strong>📌 第14周：密码破解 &amp; Wi-Fi安全</strong></h2><h3 id="核心知识点：哈希破解、WPA2握手包捕获、中间人攻击。"><a href="#核心知识点：哈希破解、WPA2握手包捕获、中间人攻击。" class="headerlink" title="核心知识点：哈希破解、WPA2握手包捕获、中间人攻击。"></a><strong>核心知识点</strong>：哈希破解、WPA2握手包捕获、中间人攻击。</h3><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+<th align="left"><strong>具体操作</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ <strong>密码破解基础</strong></td>
+<td align="left">- 学习哈希类型识别：<code>hash-identifier</code>。 - 使用<code>John</code>破解Linux shadow文件： <code>john --wordlist=rockyou.txt hashes.txt</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ <strong>Hashcat高级用法</strong></td>
+<td align="left">- 破解NTLM哈希： <code>hashcat -m 1000 hashes.txt rockyou.txt</code>。 - 使用规则攻击（<code>-r</code>参数）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ <strong>Wi-Fi嗅探（Aircrack-ng）</strong></td>
+<td align="left">- 捕获握手包： <code>airodump-ng -c 6 --bssid AP_MAC -w capture wlan0mon</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ <strong>WPA2破解</strong></td>
+<td align="left">- 使用<code>aircrack-ng</code>： <code>aircrack-ng -w rockyou.txt capture.cap</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ <strong>中间人攻击（MITM）</strong></td>
+<td align="left">- 使用<code>ettercap</code>毒化ARP： <code>ettercap -T -i eth0 -M arp /target_IP// /gateway_IP//</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 <strong>实战：破解Wi-Fi（需授权）</strong></td>
+<td align="left">- 在虚拟机中模拟攻击（如用<code>hostapd</code>创建测试AP）。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 <strong>整理笔记</strong></td>
+<td align="left">- 记录Hashcat模式、Wi-Fi破解流程。</td>
+</tr>
+</tbody></table>
+<h3 id="📚-推荐资源-7"><a href="#📚-推荐资源-7" class="headerlink" title="📚 推荐资源"></a><strong>📚 推荐资源</strong></h3><ul>
+<li><strong>Hashcat模式列表</strong>：<a target="_blank" rel="noopener" href="https://hashcat.net/wiki/doku.php?id=example_hashes">Hashcat示例</a>。</li>
+<li><strong>Wi-Fi安全实验室</strong>：<a target="_blank" rel="noopener" href="https://www.wifipineapple.com/">WiFi Pineapple</a>。</li>
+</ul>
+<hr>
+<h2 id="📌-第15周：内网渗透-横向移动"><a href="#📌-第15周：内网渗透-横向移动" class="headerlink" title="📌 第15周：内网渗透 &amp; 横向移动"></a><strong>📌 第15周：内网渗透 &amp; 横向移动</strong></h2><h3 id="核心知识点：NTLM-Relay、Pass-the-Hash、BloodHound。"><a href="#核心知识点：NTLM-Relay、Pass-the-Hash、BloodHound。" class="headerlink" title="核心知识点：NTLM Relay、Pass the Hash、BloodHound。"></a><strong>核心知识点</strong>：NTLM Relay、Pass the Hash、BloodHound。</h3><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+<th align="left"><strong>具体操作</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">✅ <strong>内网信息收集</strong></td>
+<td align="left">- 使用<code>nmap</code>扫描内网： <code>nmap -sn 192.168.1.0/24</code>。 - 查找SMB共享：<code>smbclient -L //IP</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">✅ <strong>Pass the Hash（PtH）</strong></td>
+<td align="left">- 使用<code>pth-winexe</code>： <code>pth-winexe -U admin%NTLM_HASH //IP cmd</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">✅ <strong>NTLM Relay攻击</strong></td>
+<td align="left">- 使用<code>Responder</code>+<code>Impacket</code>： <code>ntlmrelayx.py -tf targets.txt -smb2support</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">✅ <strong>BloodHound分析域环境</strong></td>
+<td align="left">- 上传Sharphound数据： <code>bloodhound-python -d domain -u user -p pass -ns IP</code>。 - 分析路径。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">✅ <strong>权限维持（Golden Ticket）</strong></td>
+<td align="left">- 使用<code>mimikatz</code>伪造票据： <code>kerberos::golden /user:admin /domain:test.com /sid:S-1-5-21-...</code>。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">🔧 <strong>实战：HTB靶机（如Active）</strong></td>
+<td align="left">- 利用SMB漏洞获取Shell，横向移动至域控。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">📝 <strong>整理笔记</strong></td>
+<td align="left">- 记录内网渗透命令、BloodHound使用技巧。</td>
+</tr>
+</tbody></table>
+<h3 id="📚-推荐资源-8"><a href="#📚-推荐资源-8" class="headerlink" title="📚 推荐资源"></a><strong>📚 推荐资源</strong></h3><ul>
+<li><strong>Impacket示例</strong>：<a target="_blank" rel="noopener" href="https://www.secureauth.com/labs/open-source-tools/impacket">Impacket指南</a>。</li>
+<li><strong>BloodHound教程</strong>：<a target="_blank" rel="noopener" href="https://bloodhound.readthedocs.io/">BloodHound官方文档</a>。</li>
+</ul>
+<hr>
+<h2 id="📌-第16周：综合实战-挑战HTB中级靶机"><a href="#📌-第16周：综合实战-挑战HTB中级靶机" class="headerlink" title="📌 第16周：综合实战 &amp; 挑战HTB中级靶机"></a><strong>📌 第16周：综合实战 &amp; 挑战HTB中级靶机</strong></h2><table>
+<thead>
+<tr>
+<th align="left"><strong>日期</strong></th>
+<th align="left"><strong>任务</strong></th>
+<th align="left"><strong>靶机推荐</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>周一</strong></td>
+<td align="left">🔧 <strong>HTB靶机：Legacy</strong></td>
+<td align="left">- 利用SMB漏洞（MS08-067）提权。</td>
+</tr>
+<tr>
+<td align="left"><strong>周二</strong></td>
+<td align="left">🔧 <strong>HTB靶机：Blue</strong></td>
+<td align="left">- 利用EternalBlue（MS17-010）获取SYSTEM权限。</td>
+</tr>
+<tr>
+<td align="left"><strong>周三</strong></td>
+<td align="left">🔧 <strong>HTB靶机：Devel</strong></td>
+<td align="left">- 通过FTP弱口令上传Webshell，提权。</td>
+</tr>
+<tr>
+<td align="left"><strong>周四</strong></td>
+<td align="left">🔧 <strong>HTB靶机：Optimum</strong></td>
+<td align="left">- 使用HFS漏洞获取初始立足点，内核提权。</td>
+</tr>
+<tr>
+<td align="left"><strong>周五</strong></td>
+<td align="left">🔧 <strong>HTB靶机：Bastion</strong></td>
+<td align="left">- 利用备份文件泄露获取密码，SSH登录提权。</td>
+</tr>
+<tr>
+<td align="left"><strong>周六</strong></td>
+<td align="left">📝 <strong>复盘总结</strong></td>
+<td align="left">- 记录每台靶机的漏洞利用链和提权方法。</td>
+</tr>
+<tr>
+<td align="left"><strong>周日</strong></td>
+<td align="left">🎯 <strong>自由挑战</strong></td>
+<td align="left">- 尝试TryHackMe的<a target="_blank" rel="noopener" href="https://tryhackme.com/room/postexploit">内网渗透房间</a>。</td>
+</tr>
+</tbody></table>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%85-%E7%AC%AC2%E4%B8%AA%E6%9C%88%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80-%E5%B7%A5%E5%85%B7%E5%85%A5%E9%97%A8%EF%BC%88%E8%AF%A6%E7%BB%86%E7%89%88%EF%BC%89"><span class="toc-number">1.</span> <span class="toc-text">📅 第2个月：信息安全基础 &amp; 工具入门（详细版）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%EF%BC%9A%E6%8E%8C%E6%8F%A1%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7%EF%BC%88Nmap%E3%80%81Burp-Suite%E3%80%81Metasploit%EF%BC%89%EF%BC%8C%E7%90%86%E8%A7%A3%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86%E3%80%82"><span class="toc-number">1.0.1.</span> <span class="toc-text">目标：掌握渗透测试基本工具（Nmap、Burp Suite、Metasploit），理解漏洞原理。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC5%E5%91%A8%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.1.</span> <span class="toc-text">📌 第5周：信息安全基础 &amp; 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90"><span class="toc-number">1.1.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC6%E5%91%A8%EF%BC%9A%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86-%E6%89%AB%E6%8F%8F%EF%BC%88Nmap%E3%80%81Whois%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">📌 第6周：信息收集 &amp; 扫描（Nmap、Whois）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC7%E5%91%A8%EF%BC%9AWeb%E5%AE%89%E5%85%A8%E5%85%A5%E9%97%A8%EF%BC%88Burp-Suite%E3%80%81SQL%E6%B3%A8%E5%85%A5%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">📌 第7周：Web安全入门（Burp Suite、SQL注入）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC8%E5%91%A8%EF%BC%9AMetasploit%E6%A1%86%E6%9E%B6-%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">1.4.</span> <span class="toc-text">📌 第8周：Metasploit框架 &amp; 漏洞利用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-3"><span class="toc-number">1.4.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%85-%E7%AC%AC3%E4%B8%AA%E6%9C%88%EF%BC%9AWeb%E5%AE%89%E5%85%A8%E4%B8%93%E9%A1%B9%EF%BC%88%E8%B6%85%E8%AF%A6%E7%BB%86%E7%89%88%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">📅 第3个月：Web安全专项（超详细版）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E6%A0%87%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3OWASP-Top-10%E6%BC%8F%E6%B4%9E%EF%BC%8C%E6%8E%8C%E6%8F%A1Burp-Suite%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD%E3%80%82"><span class="toc-number">2.0.1.</span> <span class="toc-text">目标：深入理解OWASP Top 10漏洞，掌握Burp Suite高级功能。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC9%E5%91%A8%EF%BC%9ASQL%E6%B3%A8%E5%85%A5%E8%BF%9B%E9%98%B6"><span class="toc-number">2.1.</span> <span class="toc-text">📌 第9周：SQL注入进阶</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC10%E5%91%A8%EF%BC%9AXSS-CSRF"><span class="toc-number">2.2.</span> <span class="toc-text">📌 第10周：XSS &amp; CSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC11%E5%91%A8%EF%BC%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E-SSRF"><span class="toc-number">2.3.</span> <span class="toc-text">📌 第11周：文件上传漏洞 &amp; SSRF</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-4"><span class="toc-number">2.3.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC12%E5%91%A8%EF%BC%9A%E5%91%BD%E4%BB%A4%E6%B3%A8%E5%85%A5-XXE"><span class="toc-number">2.4.</span> <span class="toc-text">📌 第12周：命令注入 &amp; XXE</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-5"><span class="toc-number">2.4.1.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%F0%9F%93%85-%E7%AC%AC4%E4%B8%AA%E6%9C%88%EF%BC%9A%E7%B3%BB%E7%BB%9F-%E7%BD%91%E7%BB%9C%E6%B8%97%E9%80%8F%EF%BC%88%E6%AF%8F%E6%97%A5%E8%AE%A1%E5%88%92%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">📅 第4个月：系统 &amp; 网络渗透（每日计划）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%8E%AF-%E7%9B%AE%E6%A0%87"><span class="toc-number">3.1.</span> <span class="toc-text">🎯 目标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC13%E5%91%A8%EF%BC%9AWindows-Linux%E6%8F%90%E6%9D%83"><span class="toc-number">3.2.</span> <span class="toc-text">📌 第13周：Windows&#x2F;Linux提权</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A%E5%86%85%E6%A0%B8%E6%BC%8F%E6%B4%9E%E3%80%81SUID-SGID%E3%80%81%E6%9C%8D%E5%8A%A1%E6%BB%A5%E7%94%A8%E3%80%81%E4%BB%A4%E7%89%8C%E7%AA%83%E5%8F%96%E3%80%82"><span class="toc-number">3.2.1.</span> <span class="toc-text">核心知识点：内核漏洞、SUID&#x2F;SGID、服务滥用、令牌窃取。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-6"><span class="toc-number">3.2.2.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC14%E5%91%A8%EF%BC%9A%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3-Wi-Fi%E5%AE%89%E5%85%A8"><span class="toc-number">3.3.</span> <span class="toc-text">📌 第14周：密码破解 &amp; Wi-Fi安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9A%E5%93%88%E5%B8%8C%E7%A0%B4%E8%A7%A3%E3%80%81WPA2%E6%8F%A1%E6%89%8B%E5%8C%85%E6%8D%95%E8%8E%B7%E3%80%81%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E3%80%82"><span class="toc-number">3.3.1.</span> <span class="toc-text">核心知识点：哈希破解、WPA2握手包捕获、中间人攻击。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-7"><span class="toc-number">3.3.2.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC15%E5%91%A8%EF%BC%9A%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="toc-number">3.4.</span> <span class="toc-text">📌 第15周：内网渗透 &amp; 横向移动</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%9ANTLM-Relay%E3%80%81Pass-the-Hash%E3%80%81BloodHound%E3%80%82"><span class="toc-number">3.4.1.</span> <span class="toc-text">核心知识点：NTLM Relay、Pass the Hash、BloodHound。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%9A-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%BA%90-8"><span class="toc-number">3.4.2.</span> <span class="toc-text">📚 推荐资源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%8C-%E7%AC%AC16%E5%91%A8%EF%BC%9A%E7%BB%BC%E5%90%88%E5%AE%9E%E6%88%98-%E6%8C%91%E6%88%98HTB%E4%B8%AD%E7%BA%A7%E9%9D%B6%E6%9C%BA"><span class="toc-number">3.5.</span> <span class="toc-text">📌 第16周：综合实战 &amp; 挑战HTB中级靶机</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&text=从0开始学习渗透"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&is_video=false&description=从0开始学习渗透"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=从0开始学习渗透&body=Check out this article: http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&title=从0开始学习渗透"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&name=从0开始学习渗透&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/&t=从0开始学习渗透"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    P1ant731
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
